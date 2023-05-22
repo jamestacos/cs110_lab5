@@ -25,6 +25,19 @@ app.get('/books', (req, res) => {
     res.json(books);
 });
 
+// this is the get route for the isbn books so we can edit them
+app.get("/book/:isbn", (req, res) => {
+    const isbn = req.params.isbn;
+  
+    const book = books.find((book) => book.isbn === isbn);
+  
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).send("Book not found");
+    }
+  });
+
 app.post('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
     const newBook = req.body;
@@ -43,15 +56,12 @@ app.post('/book/:isbn', (req, res) => {
 app.delete('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
-    for (let i = 0; i < books.length; i++) {
-        let book = books[i];
-
-        if (book.isbn === isbn) {
-            books.splice(i, 1);
-            break;
+    books = books.filter((i) => {
+        if (i.isbn !== isbn){
+            return true;
         }
-    }
-
+        return false;
+    });
     res.send('Book is deleted');
 });
 
