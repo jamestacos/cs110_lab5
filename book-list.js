@@ -71,7 +71,33 @@ async function loadBooks (){
 
             document.getElementById("books").innerHTML = document.getElementById("books").innerHTML + x;
         }
+
+        const deleteButtons = document.getElementsByClassName("delete-button");
+        for (let deleteButton of deleteButtons) {
+            deleteButton.addEventListener("click", deleteBook);
+        }
     }
 }
+
+async function deleteBook() {
+    const isbn = this.dataset.isbn;
+
+    try {
+        const response = await fetch(`http://localhost:3000/book/${isbn}`, {
+            method: "DELETE"
+        });
+
+        if (response.status === 200) {
+            console.log("Book deleted");
+            // Refresh the book list
+            loadBooks();
+        } else {
+            console.log("Error deleting book");
+        }
+    } catch (error) {
+        console.log("Error deleting book:", error);
+    }
+}
+
 
 loadBooks();

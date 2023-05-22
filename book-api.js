@@ -40,14 +40,19 @@ app.post('/book/:isbn', (req, res) => {
     res.send('Book is edited');
 });
 
-// app.delete('/book/:isbn', (req, res) => {
-//     const isbn = req.params.isbn;
+app.delete('/book/:isbn', (req, res) => {
+    const isbn = req.params.isbn;
 
-//     books = books.filter((book) => book.isbn !== isbn);
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i];
 
-//     res.send('Book is deleted');
-// });
+        if (book.isbn === isbn) {
+            books.splice(i, 1);
+            break;
+        }
+    }
 
-app.delete('')
+    res.send('Book is deleted');
+});
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

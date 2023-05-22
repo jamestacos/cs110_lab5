@@ -3,6 +3,41 @@
     <h1>Create New Book</h1>
     <hr>
 
+    <style>
+        .navbar {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+    
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .navbar li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    
+        .navbar li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+    
+        .navbar li a:hover {
+            color: #007bff;
+        }
+    </style>
+    
+    <div class="navbar">
+        <ul>
+            <li><a href="#">New Book</a></li>
+            <li><a href="#">Book List</a></li>
+        </ul>
+    </div>
+    
     <form action="http://localhost:3000/book" method="POST">
         <div class="form-group">
             <label for="ISBN">ISBN</label>
